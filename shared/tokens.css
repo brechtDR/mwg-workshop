@@ -42,6 +42,19 @@
     --p-radius-lg: 16px;
     --p-radius-full: 9999px;
 
+    --p-duration-100: 100ms;
+    --p-duration-150: 150ms;
+    --p-duration-200: 200ms;
+    --p-duration-300: 300ms;
+    --p-duration-500: 500ms;
+    --p-duration-800: 800ms;
+
+    --p-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --p-ease-entrance: cubic-bezier(0, 0, 0.2, 1);
+    --p-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+    --p-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --p-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+
     /* TIER 2: SEMANTIC — primitives given purpose */
     color-scheme: light dark;
 
@@ -77,6 +90,15 @@
     --s-font-heading: var(--p-font-serif);
     --s-font-body: var(--p-font-sans);
     --s-font-code: var(--p-font-mono);
+
+    --s-motion-duration-fast: var(--p-duration-100);
+    --s-motion-duration-moderate: var(--p-duration-200);
+    --s-motion-duration-deliberate: var(--p-duration-300);
+
+    --s-motion-ease-standard: var(--p-ease-standard);
+    --s-motion-ease-entrance: var(--p-ease-entrance);
+    --s-motion-ease-exit: var(--p-ease-exit);
+    --s-motion-ease-spring: var(--p-ease-spring);
   }
 
   /* Manual override: system, or the opposite of system. */
