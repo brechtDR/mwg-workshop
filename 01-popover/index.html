@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Exercise 01 — Anchored popover tooltip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/tokens.css" />
+    <link rel="stylesheet" href="../shared/base.css" />
+    <style>
+      @layer molecules.badge {
+        .status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--p-space-2);
+          padding: var(--p-space-1) var(--p-space-3);
+          border-radius: var(--p-radius-full);
+          background: var(--c-badge-bg, var(--s-color-surface-container));
+          color: var(--s-color-text-primary);
+          border: 1px solid var(--s-color-border-subtle);
+          font-family: var(--s-font-code);
+          font-size: 0.8125rem;
+          cursor: pointer;
+        }
+
+        .status-badge__dot {
+          width: 8px;
+          height: 8px;
+          border-radius: var(--p-radius-full);
+          background: var(--s-color-brand-primary);
+        }
+      }
+
+      @layer molecules.tooltip {
+        .tooltip {
+          padding: var(--p-space-2) var(--p-space-3);
+          max-width: 26ch;
+          background: var(--c-tooltip-bg, var(--s-color-surface-elevated));
+          color: var(--s-color-text-primary);
+          border: 1px solid var(--s-color-border-subtle);
+          border-radius: var(--p-radius-md);
+          box-shadow: var(--s-shadow-lg);
+          font-size: 0.8125rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="exercise-shell">
+      <p class="exercise-note">
+        Exercise 01 — make the tooltip work without a single line of JavaScript. The TODOs are numbered.
+      </p>
+
+      <article>
+        <h1>Anchoring</h1>
+        <p>
+          This article component targets
+          <button type="button" class="status-badge">
+            <span class="status-badge__dot" aria-hidden="true"></span>
+            Baseline 2024
+          </button>
+          as its minimum bar. Click the badge — or Tab to it and press Enter — to see what that means.
+        </p>
+        <p>
+          Nothing here should be clipped by overflow, trapped under another card, or left open when you press Escape.
+          The browser handles all three — if you let it.
+        </p>
+      </article>
+
+      <div id="baseline-tooltip" class="tooltip" role="tooltip">
+        Baseline 2024 means this feature works across all major browsers, and has for long enough that you can rely on
+        it without a polyfill.
+      </div>
+    </main>
+  </body>
+</html>

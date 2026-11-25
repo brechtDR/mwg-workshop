@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Exercise 07 — The visual contract</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/tokens.css" />
+    <link rel="stylesheet" href="../shared/base.css" />
+    <style>
+      @layer molecules.hero {
+        .hero {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+          align-items: center;
+          padding: 60px 40px;
+          margin-top: 24px;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+          font-family: Inter, Helvetica, Arial, sans-serif;
+          color: #111827;
+          transition:
+            transform 0.2s,
+            box-shadow 0.2s;
+        }
+
+        .hero:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15);
+        }
+
+        .hero__eyebrow {
+          margin: 0 0 12px;
+          color: #2563eb;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .hero h1 {
+          margin: 0 0 16px;
+          font-family: Inter, Helvetica, Arial, sans-serif;
+          font-size: 44px;
+          line-height: 1.1;
+        }
+
+        .hero__lead {
+          margin: 0 0 28px;
+          color: #6b7280;
+          font-size: 18px;
+        }
+
+        .hero__cta {
+          display: inline-block;
+          padding: 12px 22px;
+          background: #2563eb;
+          color: #ffffff;
+          border-radius: 8px;
+          font-weight: 600;
+          text-decoration: none;
+        }
+
+        .hero__cta:hover {
+          background: #1d4ed8;
+          transform: scale(1.05);
+        }
+
+        .hero__media {
+          aspect-ratio: 4 / 3;
+          background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+          border-radius: 12px;
+        }
+      }
+
+      @layer pages {
+        .exercise-shell {
+          max-width: 64rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="exercise-shell">
+      <p class="exercise-note">
+        Exercise 07 — this hero is the "before": what an agent guesses without a design contract. Ask your agent to read
+        <code>DESIGN.md</code> in this folder first, then rebuild it. Then lint the contract and break it on purpose.
+      </p>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="hero__eyebrow">Next-gen platform</p>
+          <h1 id="hero-title">Unlock the power of modern UI</h1>
+          <p class="hero__lead">
+            Revolutionize your workflow with cutting-edge solutions that empower teams to build faster than ever before.
+          </p>
+          <a class="hero__cta" href="#">Get started</a>
+        </div>
+        <div class="hero__media" role="img" aria-label="Placeholder illustration"></div>
+      </section>
+    </main>
+  </body>
+</html>

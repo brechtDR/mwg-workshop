@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Exercise 03 — Scroll-driven progress & reveals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/tokens.css" />
+    <link rel="stylesheet" href="../shared/base.css" />
+    <style>
+      @layer molecules.scroll {
+        .progress-bar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: var(--c-progress-color, var(--s-color-brand-primary));
+          transform-origin: left;
+        }
+
+        .reveal-card {
+          padding: var(--p-space-6);
+          background: var(--c-card-bg, var(--s-color-surface-elevated));
+          border: 1px solid var(--s-color-border-subtle);
+          border-radius: var(--p-radius-lg);
+          box-shadow: var(--s-shadow-sm);
+        }
+
+        .reveal-card + .reveal-card {
+          margin-top: var(--p-space-6);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-bar" aria-hidden="true"></div>
+
+    <main class="exercise-shell">
+      <p class="exercise-note">
+        Exercise 03 — the bar above should fill as you scroll; the cards below should reveal themselves on entry.
+        Currently neither happens. No JavaScript may be harmed in this exercise.
+      </p>
+
+      <h1>The compositor does the work</h1>
+      <p>
+        Scroll-driven animations run off the main thread. The browser maps scroll position to animation progress
+        directly — no events, no throttling, no jank.
+      </p>
+
+      <article class="reveal-card">
+        <h2>scroll()</h2>
+        <p>Ties animation progress to a scroll position: the document, a scroller, any overflow container you name.</p>
+      </article>
+
+      <article class="reveal-card">
+        <h2>view()</h2>
+        <p>
+          Ties progress to an element's own visibility inside its scroller. This is how an element animates itself into
+          view.
+        </p>
+      </article>
+
+      <article class="reveal-card">
+        <h2>animation-range</h2>
+        <p>
+          Decides where in the journey the animation starts and ends. Entry 10% to cover 35% reads like a sentence once
+          you've said it twice.
+        </p>
+      </article>
+
+      <article class="reveal-card">
+        <h2>prefers-reduced-motion</h2>
+        <p>The guard rail. A state change that motion communicates must survive the motion being switched off.</p>
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Exercise 02 — Custom select, accessibly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/tokens.css" />
+    <link rel="stylesheet" href="../shared/base.css" />
+    <style>
+      @layer molecules.select {
+        .density-field {
+          display: grid;
+          gap: var(--p-space-2);
+          max-width: 22rem;
+        }
+
+        .density-field label {
+          font-weight: 700;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="exercise-shell">
+      <p class="exercise-note">
+        Exercise 02 — this select works. It submits, it announces itself, it keyboards. It is also completely unstyled.
+        Make it yours without breaking any of that.
+      </p>
+
+      <h1>Pick a density</h1>
+      <p>
+        Three options, each with a small badge. In a supporting browser the trigger should show the chosen option, badge
+        included.
+      </p>
+
+      <div class="density-field">
+        <label for="density">Interface density</label>
+        <select id="density" name="density">
+          <option value="compact">
+            <span class="option-badge" aria-hidden="true">S</span>
+            Compact — dense tables, tight cards
+          </option>
+          <option value="normal" selected>
+            <span class="option-badge" aria-hidden="true">M</span>
+            Normal — the default reading rhythm
+          </option>
+          <option value="spacious">
+            <span class="option-badge" aria-hidden="true">L</span>
+            Spacious — airy, editorial spacing
+          </option>
+        </select>
+      </div>
+    </main>
+  </body>
+</html>

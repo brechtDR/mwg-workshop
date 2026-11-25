@@ -1,0 +1,89 @@
+/**
+ * Shared 3-Tier Design Tokens — Defying Gravity exercises
+ *
+ * Ladder: Primitives (--p-*) -> Semantics (--s-*) -> Components (--c-*)
+ * Components never reference a primitive directly.
+ */
+
+@layer tokens {
+  :root {
+    /* TIER 1: PRIMITIVES — raw, context-free values */
+    --p-color-neutral-0: oklch(100% 0 0);
+    --p-color-neutral-50: oklch(98% 0.005 60);
+    --p-color-neutral-100: oklch(94% 0.01 60);
+    --p-color-neutral-200: oklch(88% 0.015 60);
+    --p-color-neutral-400: oklch(62% 0.018 60);
+    --p-color-neutral-700: oklch(35% 0.02 60);
+    --p-color-neutral-800: oklch(22% 0.02 60);
+    --p-color-neutral-900: oklch(14% 0.02 60);
+    --p-color-neutral-950: oklch(8% 0.01 60);
+
+    --p-color-brand-light: oklch(58% 0.22 355);
+    --p-color-brand-dark: oklch(72% 0.2 355);
+    --p-color-azure-light: oklch(55% 0.2 250);
+    --p-color-azure-dark: oklch(75% 0.18 250);
+    --p-color-amber-light: oklch(68% 0.18 65);
+    --p-color-amber-dark: oklch(82% 0.15 65);
+
+    --p-font-serif: "Playfair Display", Georgia, Cambria, serif;
+    --p-font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --p-font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+    --p-space-1: 4px;
+    --p-space-2: 8px;
+    --p-space-3: 12px;
+    --p-space-4: 16px;
+    --p-space-6: 24px;
+    --p-space-8: 32px;
+    --p-space-12: 48px;
+
+    --p-radius-sm: 6px;
+    --p-radius-md: 10px;
+    --p-radius-lg: 16px;
+    --p-radius-full: 9999px;
+
+    /* TIER 2: SEMANTIC — primitives given purpose */
+    color-scheme: light dark;
+
+    --s-color-surface: light-dark(var(--p-color-neutral-50), var(--p-color-neutral-950));
+    --s-color-surface-elevated: light-dark(var(--p-color-neutral-0), var(--p-color-neutral-900));
+    --s-color-surface-container: light-dark(var(--p-color-neutral-100), var(--p-color-neutral-800));
+
+    --s-color-text-primary: light-dark(var(--p-color-neutral-900), var(--p-color-neutral-50));
+    --s-color-text-secondary: light-dark(var(--p-color-neutral-700), var(--p-color-neutral-200));
+
+    --s-color-brand-primary: light-dark(var(--p-color-brand-light), var(--p-color-brand-dark));
+    --s-color-brand-accent: light-dark(var(--p-color-azure-light), var(--p-color-azure-dark));
+    --s-color-brand-highlight: light-dark(var(--p-color-amber-light), var(--p-color-amber-dark));
+
+    --s-color-border-subtle: light-dark(var(--p-color-neutral-200), var(--p-color-neutral-800));
+    --s-color-border-strong: light-dark(var(--p-color-neutral-700), var(--p-color-neutral-200));
+
+    /* Dark mode is not only colour: shadows are re-tuned per scheme */
+    --s-shadow-sm: light-dark(0 1px 2px rgb(14 15 15 / 0.05), 0 1px 2px rgb(0 0 0 / 0.4));
+    --s-shadow-md: light-dark(0 4px 12px rgb(14 15 15 / 0.08), 0 4px 16px rgb(0 0 0 / 0.6));
+    --s-shadow-lg: light-dark(0 12px 32px rgb(14 15 15 / 0.12), 0 12px 40px rgb(0 0 0 / 0.8));
+
+    --s-space-subtle: var(--p-space-1);
+    --s-space-compact: var(--p-space-2);
+    --s-space-normal: var(--p-space-4);
+    --s-space-spacious: var(--p-space-8);
+
+    --s-radius-sm: var(--p-radius-sm);
+    --s-radius-md: var(--p-radius-md);
+    --s-radius-lg: var(--p-radius-lg);
+    --s-radius-full: var(--p-radius-full);
+
+    --s-font-heading: var(--p-font-serif);
+    --s-font-body: var(--p-font-sans);
+    --s-font-code: var(--p-font-mono);
+  }
+
+  /* Manual override: system, or the opposite of system. */
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+}

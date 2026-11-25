@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Exercise 04 — Density-aware card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/tokens.css" />
+    <link rel="stylesheet" href="../shared/base.css" />
+    <style>
+      @layer molecules.density {
+        .density-toggle {
+          display: inline-flex;
+          gap: var(--p-space-2);
+          margin-bottom: var(--p-space-4);
+        }
+
+        .density-toggle button {
+          padding: var(--p-space-2) var(--p-space-4);
+          border: 1px solid var(--s-color-border-subtle);
+          border-radius: var(--p-radius-md);
+          background: var(--c-button-bg, var(--s-color-surface-elevated));
+          color: var(--s-color-text-primary);
+          font: inherit;
+          font-size: 0.875rem;
+          cursor: pointer;
+        }
+
+        .density-toggle button[aria-pressed="true"] {
+          background: var(--s-color-brand-primary);
+          color: var(--p-color-neutral-0);
+          border-color: transparent;
+        }
+
+        /* TODO 4: this toggle is a lie if the browser can't honour it.
+           Hide it by default and reveal it only where @container style()
+           queries work (a marker custom property on :root is the trick).
+           Keep the hide and the reveal adjacent in this one layer — split
+           them across layers and the later layer wins regardless of
+           support. */
+
+        .bio-card {
+          display: flex;
+          gap: var(--p-space-4);
+          align-items: flex-start;
+          /* TODO 1: give the card a private --card-padding local that reads
+             the component token, falling back to the semantic normal space. */
+          padding: var(--p-space-4);
+          background: var(--c-card-bg, var(--s-color-surface-elevated));
+          border: 1px solid var(--s-color-border-subtle);
+          border-radius: var(--p-radius-lg);
+          box-shadow: var(--s-shadow-sm);
+        }
+
+        .bio-card__avatar {
+          width: 56px;
+          height: 56px;
+          border-radius: var(--p-radius-full);
+          background: var(--s-color-brand-primary);
+          color: var(--p-color-neutral-0);
+          display: grid;
+          place-items: center;
+          font-family: var(--s-font-heading);
+          font-weight: 700;
+          flex-shrink: 0;
+        }
+
+        .bio-card h2 {
+          margin: 0 0 var(--p-space-1);
+          font-size: 1.125rem;
+        }
+
+        .bio-card p {
+          margin: 0;
+          color: var(--s-color-text-secondary);
+          font-size: 0.9375rem;
+        }
+
+        /*
+         * TODO 2: when an ancestor sets --density: compact, switch the card
+         * to the compact spacing token. When --density: spacious, the
+         * spacious one. Switch TOKENS, not raw values.
+         *
+         * TODO 3: remember — no container-type is required for style
+         * queries, and a container cannot be styled by its own query.
+         * Only descendants react.
+         */
+      }
+    </style>
+  </head>
+  <body>
+    <main class="exercise-shell">
+      <p class="exercise-note">
+        Exercise 04 — the buttons set <code>--density</code> on the card's
+        container. Right now the card ignores it. Teach the card to listen,
+        by switching tokens instead of values.
+      </p>
+
+      <div class="density-toggle" role="group" aria-label="Density">
+        <button type="button" data-density="compact">Compact</button>
+        <button type="button" data-density="normal" aria-pressed="true">Normal</button>
+        <button type="button" data-density="spacious">Spacious</button>
+      </div>
+
+      <div class="bio-region">
+        <article class="bio-card">
+          <span class="bio-card__avatar" aria-hidden="true">BD</span>
+          <div>
+            <h2>Brecht De Ruyte</h2>
+            <p>
+              Front-end developer, CSS enthusiast, and person who keeps telling
+              agents that the platform already does that.
+            </p>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <script>
+      // The only JavaScript in this exercise: set the mode property.
+      // All visual reaction must come from CSS.
+      const region = document.querySelector('.bio-region');
+      const buttons = document.querySelectorAll('.density-toggle button');
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          region.style.setProperty('--density', button.dataset.density);
+          buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        });
+      });
+    </script>
+  </body>
+</html>

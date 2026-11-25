@@ -1,0 +1,68 @@
+/**
+ * Shared base layer — Defying Gravity exercises
+ * Minimal, readable defaults so each exercise starts from something decent.
+ */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--s-font-body);
+    background-color: var(--s-color-surface);
+    color: var(--s-color-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--s-font-heading);
+    text-wrap: balance;
+    line-height: 1.15;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  code {
+    font-family: var(--s-font-code);
+    font-size: 0.9em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--s-color-brand-accent);
+    outline-offset: 2px;
+    border-radius: var(--p-radius-sm);
+  }
+
+  .exercise-shell {
+    max-width: 42rem;
+    margin-inline: auto;
+    padding: var(--p-space-8) var(--p-space-4) var(--p-space-12);
+  }
+
+  .exercise-note {
+    padding: var(--p-space-3) var(--p-space-4);
+    border: 1px dashed var(--s-color-border-strong);
+    border-radius: var(--p-radius-md);
+    color: var(--s-color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

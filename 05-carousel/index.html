@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Exercise 05 — Bonus: accessible carousel</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/tokens.css" />
+    <link rel="stylesheet" href="../shared/base.css" />
+    <style>
+      @layer molecules.carousel {
+        .carousel__viewport {
+          display: flex;
+          gap: var(--p-space-4);
+          overflow-x: auto;
+          padding: var(--p-space-4);
+          margin: 0;
+          list-style: none;
+        }
+
+        .carousel__slide {
+          flex: 0 0 16rem;
+        }
+
+        .carousel__card {
+          min-height: 100%;
+          padding: var(--p-space-6);
+          background: var(--c-card-bg, var(--s-color-surface-elevated));
+          border: 1px solid var(--s-color-border-subtle);
+          border-radius: var(--p-radius-lg);
+          box-shadow: var(--s-shadow-sm);
+        }
+
+        .carousel__card h2 {
+          margin: 0 0 var(--p-space-2);
+          font-size: 1.0625rem;
+        }
+
+        .carousel__card p {
+          margin: 0;
+          color: var(--s-color-text-secondary);
+          font-size: 0.9375rem;
+        }
+        .carousel__pagination {
+          display: flex;
+          justify-content: center;
+          gap: var(--p-space-2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="exercise-shell">
+      <p class="exercise-note">
+        Bonus exercise — for fast finishers. The content already scrolls and all navigation links work. Turn it into a
+        progressively enhanced, accessible carousel without adding a carousel library.
+      </p>
+
+      <section class="carousel" aria-labelledby="carousel-title" aria-roledescription="carousel">
+        <h1 id="carousel-title">The dependency-free carousel</h1>
+
+        <ul class="carousel__viewport" role="list" tabindex="0" aria-label="Featured articles">
+          <li id="slide-1" class="carousel__slide">
+            <article class="carousel__card">
+              <h2>Anchoring</h2>
+              <p>CSS anchor positioning ends twenty years of z-index wars.</p>
+            </article>
+          </li>
+          <li id="slide-2" class="carousel__slide">
+            <article class="carousel__card">
+              <h2>Select, styled</h2>
+              <p>appearance: base-select lets you style the picker itself.</p>
+            </article>
+          </li>
+          <li id="slide-3" class="carousel__slide">
+            <article class="carousel__card">
+              <h2>Scroll timelines</h2>
+              <p>The compositor maps scroll progress without event handlers.</p>
+            </article>
+          </li>
+          <li id="slide-4" class="carousel__slide">
+            <article class="carousel__card">
+              <h2>Style queries</h2>
+              <p>Containers set modes; descendants switch tokens.</p>
+            </article>
+          </li>
+          <li id="slide-5" class="carousel__slide">
+            <article class="carousel__card">
+              <h2>Top layer</h2>
+              <p>Popovers escape clipping by promotion, not z-index.</p>
+            </article>
+          </li>
+        </ul>
+
+        <nav class="carousel__pagination" aria-label="Choose a slide">
+          <a href="#slide-1" aria-label="Go to slide 1: Anchoring"></a>
+          <a href="#slide-2" aria-label="Go to slide 2: Select, styled"></a>
+          <a href="#slide-3" aria-label="Go to slide 3: Scroll timelines"></a>
+          <a href="#slide-4" aria-label="Go to slide 4: Style queries"></a>
+          <a href="#slide-5" aria-label="Go to slide 5: Top layer"></a>
+        </nav>
+
+        <!-- TODO 5: add prev/next buttons hidden by default. In a module
+             script, reveal them, move by snapped index, mirror the active dot
+             with aria-current on scrollend, announce settled slide changes in
+             a polite status, and add IntersectionObserver fallbacks for
+             unsupported scroll-target/snap-event features. -->
+      </section>
+    </main>
+  </body>
+</html>

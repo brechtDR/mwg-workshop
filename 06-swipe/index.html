@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Exercise 06 — Bonus: swipe-to-delete list</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared/tokens.css" />
+    <link rel="stylesheet" href="../shared/base.css" />
+    <style>
+      @layer molecules.swipe {
+        .swipe-list {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          border: 1px solid var(--s-color-border-subtle);
+          border-radius: var(--p-radius-lg);
+          overflow: clip;
+        }
+
+        .swipe-list__content {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--p-space-4);
+          padding: var(--p-space-4);
+          background: var(--c-swipe-content-bg, var(--s-color-surface-elevated));
+        }
+
+        .swipe-list__item + .swipe-list__item .swipe-list__content {
+          border-top: 1px solid var(--s-color-border-subtle);
+        }
+
+        .swipe-list__title {
+          margin: 0;
+          font-size: 1.0625rem;
+        }
+
+        .swipe-list__meta {
+          margin: 0;
+          color: var(--s-color-text-secondary);
+          font-size: 0.875rem;
+        }
+
+        .swipe-list__remove[hidden] {
+          display: none;
+        }
+
+        .visually-hidden {
+          position: absolute;
+          inline-size: 1px;
+          block-size: 1px;
+          overflow: hidden;
+          clip-path: inset(50%);
+          white-space: nowrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="exercise-shell">
+      <p class="exercise-note">
+        Bonus exercise — for fast finishers. The reading list renders fine, but nothing swipes. Make each row
+        swipe-to-delete with the scroll engine the browser already ships — no gesture library, no pointer math.
+      </p>
+
+      <h1 id="list-title" tabindex="-1">Your reading queue</h1>
+
+      <ul class="swipe-list" aria-labelledby="list-title">
+        <li class="swipe-list__item">
+          <div class="swipe-list__track">
+            <div class="swipe-list__content">
+              <div>
+                <h2 class="swipe-list__title">Anchoring</h2>
+                <p class="swipe-list__meta">Anchor positioning · 6 min</p>
+              </div>
+              <button class="swipe-list__remove" type="button" hidden>
+                Remove<span class="visually-hidden"> Anchoring</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        <li class="swipe-list__item">
+          <div class="swipe-list__track">
+            <div class="swipe-list__content">
+              <div>
+                <h2 class="swipe-list__title">Select, styled</h2>
+                <p class="swipe-list__meta">Customizable select · 4 min</p>
+              </div>
+              <button class="swipe-list__remove" type="button" hidden>
+                Remove<span class="visually-hidden"> Select, styled</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        <li class="swipe-list__item">
+          <div class="swipe-list__track">
+            <div class="swipe-list__content">
+              <div>
+                <h2 class="swipe-list__title">Scroll timelines</h2>
+                <p class="swipe-list__meta">Scroll-driven animations · 8 min</p>
+              </div>
+              <button class="swipe-list__remove" type="button" hidden>
+                Remove<span class="visually-hidden"> Scroll timelines</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        <li class="swipe-list__item">
+          <div class="swipe-list__track">
+            <div class="swipe-list__content">
+              <div>
+                <h2 class="swipe-list__title">Style queries</h2>
+                <p class="swipe-list__meta">Container queries · 5 min</p>
+              </div>
+              <button class="swipe-list__remove" type="button" hidden>
+                Remove<span class="visually-hidden"> Style queries</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        <li class="swipe-list__item">
+          <div class="swipe-list__track">
+            <div class="swipe-list__content">
+              <div>
+                <h2 class="swipe-list__title">Top layer</h2>
+                <p class="swipe-list__meta">Popover API · 3 min</p>
+              </div>
+              <button class="swipe-list__remove" type="button" hidden>
+                Remove<span class="visually-hidden"> Top layer</span>
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="undo-toast">
+        <p class="undo-toast__message" role="status"></p>
+        <button class="undo-toast__button" type="button" hidden>Undo</button>
+      </div>
+
+      <!-- TODO 6: in a module script, wire each row up lazily when it first
+           enters the viewport (outer IntersectionObserver), add
+           .is-initialized, make the track focusable, and reveal the Remove
+           button as the accessible alternative to swiping. Detect the swipe
+           with an IntersectionObserver rooted at the track: ~0.8 visible
+           toggles .is-activating, ~0.2 visible commits. On commit, collapse
+           the row with the Web Animations API and remove it, then announce
+           it in the status region with an Undo button that restores the row
+           in place. Pick up re-inserted rows with a MutationObserver, and
+           feature-detect scroll-initial-target (programmatic scrollLeft plus
+           a ResizeObserver where it is unsupported). -->
+    </main>
+  </body>
+</html>
