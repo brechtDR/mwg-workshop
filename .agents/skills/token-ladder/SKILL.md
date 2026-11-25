@@ -175,7 +175,23 @@ Use native `&` nesting **only** for:
 }
 ```
 
-### Typography Polish
+### Typography Polish & Fluid Scaling
+
+- **Units — Prefer `rem`:** Always declare `font-size` in `rem` (never `px`) so text respects user zoom and browser preferences. Use `em` only for dimensions directly tied to the local font size (such as icon dimensions or inline badges).
+- **Fluid Typography:** Prefer fluid scaling for headings and prominent type using `clamp()` with a `rem` base + dynamic viewport/container units:
+  ```css
+  /* Fluid heading with rem preservation */
+  h1 {
+    font-size: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
+  }
+
+  /* Container-query-aware fluid typography */
+  .card__title {
+    font-size: clamp(1.125rem, 0.95rem + 1cqi, 1.5rem);
+  }
+  ```
+  > [!IMPORTANT]
+  > Fluid formulas must **always include a `rem` component** in the preferred value (e.g. `1rem + 2vw`, never `4vw` alone). Without `rem`, the text will not scale when users change their default browser font size.
 
 - Always apply `text-wrap: balance` to headings (`h1` through `h6`).
 - Always apply `text-wrap: pretty` to body copy (`p`) and lists (`li`).
@@ -199,5 +215,6 @@ Before completing any exercise or feature, verify:
 - [ ] No string-concatenation nesting (`&__child`)
 - [ ] Card containers do not use `translate` or `scale` hover lift
 - [ ] Headings have `text-wrap: balance` and paragraphs have `text-wrap: pretty`
+- [ ] Font sizes use `rem` (never fixed `px`), with fluid `clamp()` where appropriate
 - [ ] Logical properties are used (`inline-size`, `padding-inline`, `margin-block`, etc.)
 - [ ] Focus states use `:focus-visible` with tokenized outlines

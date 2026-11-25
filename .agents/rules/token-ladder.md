@@ -30,3 +30,9 @@ always_on: true
 - Container hover feedback must use tokenized `box-shadow`, `background-color`, `color`, or `opacity`.
 - `scale` or transforms are allowed only on child interactive elements inside containers (buttons/links), never on the container itself.
 - All transitions must use tokenized durations/easings, never hardcoded timings like `0.2s`.
+
+## 5. Typography & Relative Units
+- **Prefer `rem` for font sizes:** Never use fixed `px` for `font-size`. Use `rem` so text scales with user browser settings and zoom.
+- **Fluid Typography:** Prefer fluid typography using `clamp()` with a `rem` base and dynamic units (`vw` or `cqi`), e.g., `clamp(1.5rem, 1.1rem + 1.8vw, 2.5rem)`. The preferred expression must always include a `rem` value to preserve zoom accessibility.
+- **Headings & Body:** Always set `text-wrap: balance` on headings (`h1`–`h6`) and `text-wrap: pretty` on paragraphs (`p`) and lists (`li`).
+- **Uppercase Tracking:** Never use `text-transform: uppercase` without letter tracking (`letter-spacing: 0.08em`+).

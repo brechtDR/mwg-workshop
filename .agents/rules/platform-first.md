@@ -35,7 +35,11 @@ always_on: true
   - Prefer **Container Queries** (`container-type: inline-size`, `@container`) for component-internal responsiveness.
   - Reserve `@media` for viewport-level shell layouts, print, and user preference queries (`prefers-reduced-motion`, `prefers-color-scheme`).
   - Fluid grids must use intrinsic sizing (`grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr))`), avoiding rigid breakpoint-based column counts.
-- **Typography & Motion:**
+- **Typography & Units:**
+  - **Prefer `rem` for all font sizes** (never fixed `px`) so text respects user zoom and browser default font preferences. Use `em` only when dimensions must scale proportionally to the element's local font size.
+  - **Fluid Typography:** Prefer fluid typography using `clamp()` combining a `rem` base with dynamic units (viewport `vw` or container `cqi`), e.g. `clamp(1.75rem, 1.25rem + 2vw, 2.75rem)`. Never use raw viewport units alone without a `rem` base, as this breaks browser font resizing.
   - Always apply `text-wrap: balance` to headings and `text-wrap: pretty` to body text and lists.
   - Never apply `text-transform: uppercase` without tracking (`letter-spacing: 0.08em`+).
+- **Motion:**
   - State enter transitions should leverage `@starting-style` with `transition-behavior: allow-discrete`.
+  - Elements entering/exiting the top layer must transition `overlay` and `display`.
